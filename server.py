@@ -1,24 +1,31 @@
-from flask import Flask, jsonify
+from flask import Flask, render_template
 from flask_cors import CORS
 import Config
 import web_scrape
+from database import Database
 
 app = Flask(__name__)
 CORS(app)
 app.secret_key = 'shushmans'
 
-web_scrape.web_scrape()
+Database.initialize()
+# web_scrape.web_scrape()
+data = Database.find('frisco', {'category': 'Top Sellers'})
 
 
 @app.route('/')
 def index():
-    return "<h5>" + web_scrape.data.__repr__() + "</h5>"
+    return render_template('home.html', data=data)
 
 
 @app.route('/test')
 def test():
-    json = {'hello': 'world'}
-    return jsonify(json)
+    return "<h5>" + web_scrape.test().__repr__() + "</h5>"
 
+@app.route('/data')
+def data():
+    # data = Database...
+    # return jsonify(data)
 
-app.run(debug=Config.DEBUG)
+if __name__ == '__main__':
+    app.run(debug=Config.DEBUG, port=5990)
