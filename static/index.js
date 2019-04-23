@@ -2,12 +2,15 @@ $(document).ready(function(){
     let clothingData, schoolData;
 
     $.ajax({
-        url:'http://localhost:5990/data'
-    }).error(function(error){
-        console.log('error', error)
-    }).success(function(data){
-        clothingData = data
-        setSchoolData('frisco')
+        url:'http://localhost:5990/data',
+        success: function(data){
+            clothingData = data
+            loadSchool('frisco')
+            alert('/data reached')
+        },
+        error: function(error){
+            console.log('error', error)
+        }
     });
 
     function setSchoolData (schoolKey) { 
@@ -26,11 +29,11 @@ $(document).ready(function(){
                 <div class="card col-sm-12 col-md-6 col-lg-4 col-xl-3" style="width: 18rem;">
                     <img src="${item.img_src}" class="card-img-top">
                     <div class="card-body">
-                <h5 class="card-title"> ${item.title}</h5>
-                <p class="card-text"> ${item.price} </p>
-                <a href="${ item.url }" class="btn btn-primary" target="_blank">View Product</a>
-            </div>
-        </div>
+                        <h5 class="card-title"> ${item.title}</h5>
+                        <p class="card-text"> ${item.price} </p>
+                        <a href="${ item.url }" class="btn btn-primary" target="_blank">View Product</a>
+                    </div>
+                </div>
             `)
         });
     }
