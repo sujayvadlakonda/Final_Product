@@ -62,6 +62,39 @@ def test():
 
 # move session under school area.
 def web_scrape():
+    # Right now this iterates only through prepsportswear.com
+    # In the future, this should be adapted to function for multiple sites
+
+    for school_name, school_id in prepsportswear_schools.items():
+        school_url = 'https://www.prepsportswear.com/school/us/Texas/Frisco/' + school_id
+        num_skip = 0
+        for category_title, category_id in prepsportswear_categories.items():
+            category_url = school_url + category_id
+            category_session = HTMLSession()
+            category_response = category_session.get(category_url)
+            links = category_response.html.absolute_links
+
+            for product_url in links:
+                if 'https://www.prepsportswear.com/product' in product_url:
+                    if num_skip == 0:
+                        product_session = HTMLSession()
+                        product_response = product_session.get(product_url)
+                        product_response.html.render()
+                        product_title = product_response.html.find('h2', first=True).text
+                        product_price = product_response.html.find('span.priceContent', first=True).text
+                        product_img_src = product_response.html.find('img.productImage-Front', first=True).attrs['src']
+                        product = Product(title=product_title,
+                                          price=product_price,
+                                          img_src=product_img_src,
+                                          url=product_url,
+                                          school=school_name,
+                                          category=category_title)
+                        print(product_url)
+                        Database.insert('products', product.json())
+                    else:
+                        num_skip = num_skip - 1
+                        print('Skipped! ' + str(num_skip) + ' left')
+
     # for school_name, school_id in jostens_schools.items():
     #     school_url = 'https://schoolstore.jostens.com/school/texas/frisco/' + school_id + '/'
     #     for category_title, category_id in jostens_categories.items():
@@ -85,36 +118,3 @@ def web_scrape():
     #                                              'price': product_price,
     #                                              'img_src': product_img_src,
     #                                              'url': link})
-
-    # Right now this iterates only through prepsportswear.com
-    # In the future, this should be adapted to function for multiple sites
-
-    for school_name, school_id in prepsportswear_schools.items():
-        school_url = 'https://www.prepsportswear.com/school/us/Texas/Frisco/' + school_id
-        num_skip = 60
-        for category_title, category_id in prepsportswear_categories.items():
-            category_url = school_url + category_id
-            category_session = HTMLSession()
-            category_response = category_session.get(category_url)
-            links = category_response.html.absolute_links
-
-            for product_url in links:
-                if 'https://www.prepsportswear.com/product' in product_url:
-                    if num_skip == 0:
-                        product_session = HTMLSession()
-                        product_response = product_session.get(product_url)
-                        product_response.html.render()
-                        product_title = product_response.html.find('h2', first=True).text
-                        product_price = product_response.html.find('span.priceContent', first=True).text
-                        product_img_src = product_response.html.find('img.productImage-Front', first=True).attrs['src']
-                        product = Product(title=product_title,
-                                          price=product_price,
-                                          img_src=product_img_src,
-                                          url=product_url,
-                                          school=school_name,
-                                          category=category_title)
-                        print(product_url)
-                        Database.insert(school_name, product.json())
-                    else:
-                        num_skip = num_skip - 1
-                        print('Skipped! ' + str(num_skip) + ' left')

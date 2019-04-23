@@ -2,7 +2,7 @@ $(document).ready(function(){
     let clothingData, schoolData;
 
     $.ajax({
-        url:'http://localhost:5990'
+        url:'http://localhost:5990/data'
     }).error(function(error){
         console.log('error', error)
     }).success(function(data){
@@ -16,7 +16,7 @@ $(document).ready(function(){
 
     function loadSchool (schoolKey) {
         setSchoolData(schoolKey)
-        loadCategory('tShirt')
+        loadCategory('T-Shirts')
     }
 
     function loadCategory (category){
