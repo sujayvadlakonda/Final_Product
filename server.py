@@ -133,7 +133,7 @@ def test():
 
 @app.route('/data')
 def yoshidata():
-    return jsonify(dumps(data))
+    return str(dumps(data))
 
 
 if __name__ == '__main__':
