@@ -4,9 +4,9 @@ $(document).ready(function(){
     $.ajax({
         url:'http://localhost:5990/data',
         success: function(data){
-            clothingData = data
+            clothingData = JSON.parse(data)
             loadSchool('frisco')
-            alert('/data reached')
+            console.log('loaded database')
         },
         error: function(error){
             console.log('error', error)
@@ -24,22 +24,30 @@ $(document).ready(function(){
 
     function loadCategory (category){
         $('.main-content').empty()
-        schoolData[category].foreach(item => {
-            $('.main-content').append(`
-                <div class="card col-sm-12 col-md-6 col-lg-4 col-xl-3" style="width: 18rem;">
-                    <img src="${item.img_src}" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title"> ${item.title}</h5>
-                        <p class="card-text"> ${item.price} </p>
-                        <a href="${ item.url }" class="btn btn-primary" target="_blank">View Product</a>
-                    </div>
-                </div>
-            `)
-        });
+        schoolData[category].forEach(appendCard);
     }
 
-    $('school-dropdown').select(function(){
+    function appendCard (item) {
+        $('.main-content').append(`
+            <div class="card col-sm-12 col-md-6 col-lg-4 col-xl-3" style="width: 18rem;">
+                <img src="${item.img_src}" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title"> ${item.title}</h5>
+                    <p class="card-text"> ${item.price} </p>
+                    <a href="${ item.url }" class="btn btn-primary" target="_blank">View Product</a>
+                </div>
+            </div>
+        `)
+    }
+
+    $('.dropdown-item').click(function(){
+        console.log('yay')
         loadSchool($(this).attr('id'))
+    })
+
+    $('.category').click(function(){
+        console.log('yay')
+        loadCategory($(this).attr('id'))
     })
 
 })
