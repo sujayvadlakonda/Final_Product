@@ -33,85 +33,85 @@ data = {
         'Top Sellers': []
     },
 
-    # 'heritage': {
-    #     't-shirts': [],
-    #     'sweatshirts': [],
-    #     'hats': [],
-    #     'men': [],
-    #     'women': [],
-    #     'youth': [],
-    #     'top-sellers': []
-    # },
-    #
-    # 'independence': {
-    #     't-shirts': [],
-    #     'sweatshirts': [],
-    #     'hats': [],
-    #     'men': [],
-    #     'women': [],
-    #     'youth': [],
-    #     'top-sellers': []
-    # },
-    #
-    # 'lebanon-trail': {
-    #     't-shirts': [],
-    #     'sweatshirts': [],
-    #     'hats': [],
-    #     'men': [],
-    #     'women': [],
-    #     'youth': [],
-    #     'top-sellers': []
-    # },
-    #
-    # 'liberty': {
-    #     't-shirts': [],
-    #     'sweatshirts': [],
-    #     'hats': [],
-    #     'men': [],
-    #     'women': [],
-    #     'youth': [],
-    #     'top-sellers': []
-    # },
-    #
-    # 'lone-star': {
-    #     't-shirts': [],
-    #     'sweatshirts': [],
-    #     'hats': [],
-    #     'men': [],
-    #     'women': [],
-    #     'youth': [],
-    #     'top-sellers': []
-    # },
-    #
-    # 'memorial': {
-    #     't-shirts': [],
-    #     'sweatshirts': [],
-    #     'hats': [],
-    #     'men': [],
-    #     'women': [],
-    #     'youth': [],
-    #     'top-sellers': []
-    # },
-    #
-    # 'wakeland': {
-    #     't-shirts': [],
-    #     'sweatshirts': [],
-    #     'hats': [],
-    #     'men': [],
-    #     'women': [],
-    #     'youth': [],
-    #     'top-sellers': []
-    # },
-    #
-    # 'reedy': {
-    #     't-shirts': [],
-    #     'sweatshirts': [],
-    #     'hats': [],
-    #     'men': [],
-    #     'women': [],
-    #     'youth': [],
-    #     'top-sellers': []
-    # },
+    'heritage': {
+        'T-Shirts': [],
+        'Sweatshirts': [],
+        'Hats': [],
+        'Men': [],
+        'Women': [],
+        'Youth': [],
+        'Top Sellers': []
+    },
+
+    'independence': {
+        'T-Shirts': [],
+        'Sweatshirts': [],
+        'Hats': [],
+        'Men': [],
+        'Women': [],
+        'Youth': [],
+        'Top Sellers': []
+    },
+
+    'lebanon-trail': {
+        'T-Shirts': [],
+        'Sweatshirts': [],
+        'Hats': [],
+        'Men': [],
+        'Women': [],
+        'Youth': [],
+        'Top Sellers': []
+    },
+
+    'liberty': {
+        'T-Shirts': [],
+        'Sweatshirts': [],
+        'Hats': [],
+        'Men': [],
+        'Women': [],
+        'Youth': [],
+        'Top Sellers': []
+    },
+
+    'lone-star': {
+        'T-Shirts': [],
+        'Sweatshirts': [],
+        'Hats': [],
+        'Men': [],
+        'Women': [],
+        'Youth': [],
+        'Top Sellers': []
+    },
+
+    'memorial': {
+        'T-Shirts': [],
+        'Sweatshirts': [],
+        'Hats': [],
+        'Men': [],
+        'Women': [],
+        'Youth': [],
+        'Top Sellers': []
+    },
+
+    'reedy': {
+        'T-Shirts': [],
+        'Sweatshirts': [],
+        'Hats': [],
+        'Men': [],
+        'Women': [],
+        'Youth': [],
+        'Top Sellers': []
+    },
+
+    'wakeland': {
+        'T-Shirts': [],
+        'Sweatshirts': [],
+        'Hats': [],
+        'Men': [],
+        'Women': [],
+        'Youth': [],
+        'Top Sellers': []
+    },
 }
 
 for school, categories in data.items():

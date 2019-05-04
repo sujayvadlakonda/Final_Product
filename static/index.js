@@ -24,6 +24,7 @@ $(document).ready(function(){
 
     function loadCategory (category){
         $('.main-content').empty()
+        console.log('emptied')
         schoolData[category].forEach(appendCard);
     }
 
@@ -46,7 +47,7 @@ $(document).ready(function(){
     })
 
     $('.category').click(function(){
-        console.log('yay')
+        console.log($(this).attr('id'))
         loadCategory($(this).attr('id'))
     })
 

@@ -12,7 +12,8 @@ class Product(object):
                 'price': self.price,
                 'img_src': self.img_src,
                 'url': self.url,
-                'category': self.category}
+                'category': self.category,
+                'school': self.school}
 
     def __repr__(self):
         return 'Title: ' + self.title + ' Price: ' + self.price + ' Img_Src: ' + self.img_src + ' URL: ' + self.url + ' School: ' + self.school + ' Category: ' + self.category

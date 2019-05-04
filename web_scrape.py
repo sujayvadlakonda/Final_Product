@@ -4,16 +4,16 @@ from product import Product
 from database import Database
 
 prepsportswear_schools = {
-    # 'centennial': 'centennial-high-school-titans?schoolid=1007205&category=',
-    'frisco': 'frisco-high-school-fightin-raccoons?schoolid=183760&category=',
-    # 'heritage': 'heritage-high-school-coyotes?schoolid=2299078&category=',
-    # 'independence': 'independence-high-school-knights?schoolid=3093477&category=',
-    # 'lebanon Trail': 'lebanon-trail-high-school-trail-blazers?schoolid=3249929&category=',
-    # 'liberty': 'iberty-high-school-redhawks?schoolid=1282162&category=',
-    # 'lone Star': 'lone-star-high-school-rangers?schoolid=2671036&category=',
-    # 'memorial': 'frisco-memorial-high-school-warriors?schoolid=3344278&category=',
-    # 'wakeland': 'wakeland-high-school-wolverines?schoolid=1006720&category=',
-    # 'reedy': 'Rick-Reedy-High-School-Lions/productlist?schoolid=3208016&category='
+    # 'centennial': 'centennial-high-school-titans/productlist?schoolid=1007205&category=',
+    'frisco': 'frisco-high-school-fightin-raccoons/productlist?schoolid=183760&category=',
+    # 'heritage': 'heritage-high-school-coyotes/productlist?schoolid=2299078&category=',
+    # 'independence': 'independence-high-school-knights/productlist?schoolid=3093477&category=',
+    # 'lebanon-trail': 'lebanon-trail-high-school-trail-blazers/productlist?schoolid=3249929&category=',
+    # 'liberty': 'liberty-high-school-redhawks/productlist?schoolid=1282162&category=',
+    # 'lone-star': 'lone-star-high-school-rangers/productlist?schoolid=2671036&category=',
+    # 'memorial': 'frisco-memorial-high-school-warriors/productlist?schoolid=3344278&category=',
+    # 'reedy': 'Rick-Reedy-High-School-Lions/productlist?schoolid=3208016&category=',
+    # 'wakeland': 'wakeland-high-school-wolverines/productlist?schoolid=1006720&category=',
 }
 prepsportswear_categories = {
     # The Category Title: The Category ID
@@ -57,7 +57,7 @@ session.browser
 
 
 def test():
-    return Database.find('frisco', {}).count()
+    return Database.find('memorial', {}).count()
 
 
 # move session under school area.
@@ -67,15 +67,16 @@ def web_scrape():
 
     for school_name, school_id in prepsportswear_schools.items():
         school_url = 'https://www.prepsportswear.com/school/us/Texas/Frisco/' + school_id
-        num_skip = 0
+        num_skip = Database.find('frisco', {}).count()
         for category_title, category_id in prepsportswear_categories.items():
+            print(category_title)
             category_url = school_url + category_id
             category_session = HTMLSession()
             category_response = category_session.get(category_url)
             links = category_response.html.absolute_links
-
+            print(links)
             for product_url in links:
-                if 'https://www.prepsportswear.com/product' in product_url:
+                if '/product/' in product_url:
                     if num_skip == 0:
                         product_session = HTMLSession()
                         product_response = product_session.get(product_url)
@@ -90,7 +91,7 @@ def web_scrape():
                                           school=school_name,
                                           category=category_title)
                         print(product_url)
-                        Database.insert('products', product.json())
+                        Database.insert(school_name, product.json())
                     else:
                         num_skip = num_skip - 1
                         print('Skipped! ' + str(num_skip) + ' left')
